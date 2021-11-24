@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.res_item_live.view.*
 
 class LiveAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val items: List<Live> = ArrayList()
+    private var items: List<Live> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -33,6 +33,10 @@ class LiveAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun setDataSet(lives: List<Live>) {
+        this.items = lives
     }
 
     class LiveViewHolder constructor(
