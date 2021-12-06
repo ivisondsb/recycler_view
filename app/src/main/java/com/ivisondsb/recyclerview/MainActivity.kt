@@ -31,8 +31,11 @@ class MainActivity : AppCompatActivity() {
             openLink(live.link)
         }
 
-        rv.layoutManager = LinearLayoutManager(this@MainActivity)
-        rv.adapter = this.liveAdapter
+        rv.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = liveAdapter
+        }
+
     }
 
     private fun openLink(url: String) {
