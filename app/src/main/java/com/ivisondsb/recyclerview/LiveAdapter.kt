@@ -9,7 +9,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.ivisondsb.recyclerview.models.Live
 import kotlinx.android.synthetic.main.res_item_live.view.*
 
-class LiveAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LiveAdapter(private val onItemClicked: (Live) -> Unit) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: List<Live> = ArrayList()
 
@@ -26,7 +27,7 @@ class LiveAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (holder) {
 
             is LiveViewHolder -> {
-                holder.bind(items[position])
+                holder.bind(items[position], onItemClicked)
             }
 
         }
@@ -48,7 +49,7 @@ class LiveAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val liveAuthor = itemView.author
         private val liveThumbnail = itemView.thumbnail
 
-        fun bind(live: Live) {
+        fun bind(live: Live, onItemClicked: (Live) -> Unit) {
             liveTitle.text = live.title
             liveAuthor.text = live.author
 
@@ -60,6 +61,10 @@ class LiveAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .applyDefaultRequestOptions(requestOptions)
                 .load(live.thumbnailUrl)
                 .into(liveThumbnail)
+
+            itemView.setOnClickListener {
+                onItemClicked(live)
+            }
         }
     }
 }
